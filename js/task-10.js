@@ -1,4 +1,3 @@
-
 // Scrieți un script pentru crearea și ștergerea unei colecții de elemente. Utilizatorul introduce numărul de elemente în input și dă click pe butonul Create, după care colecția este afișată în pagină. Când se dă click pe butonul Destroy, colecția de elemente va fi ștearsă.
 
 // <div id="controls">
@@ -27,3 +26,34 @@ function getRandomHexColor() {
     .toString(16)
     .padStart(6, 0)}`;
 }
+
+function createBoxes(amount) {
+  const boxesContainer = document.getElementById("boxes");
+  boxesContainer.innerHTML = "";
+  let boxSize = 30;
+  for (let i = 0; i < amount; i++) {
+    const box = document.createElement("div");
+
+    box.style.width = boxSize + "px";
+    box.style.height = boxSize + "px";
+    box.style.backgroundColor = getRandomHexColor();
+    boxesContainer.appendChild(box);
+    boxSize += 10;
+  }
+}
+
+function destroyBoxes() {
+  const boxesContainer = document.getElementById("boxes");
+  boxesContainer.innerHTML = "";
+}
+
+const createBtn = document.querySelector("[data-create]");
+const destroyBtn = document.querySelector("[data-destroy]");
+
+createBtn.addEventListener("click", () => {
+  const inpuntAmount = document.querySelector("input");
+  const amount = parseInt(inpuntAmount.value);
+  createBoxes(amount);
+});
+
+destroyBtn.addEventListener("click", destroyBoxes);
